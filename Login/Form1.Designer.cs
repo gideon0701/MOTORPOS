@@ -131,8 +131,7 @@ namespace PointOfSalesApp
             this.txtUserName.PromptText = "Please input";
             this.txtUserName.Size = new System.Drawing.Size(185, 23);
             this.txtUserName.TabIndex = 2;
-            this.txtUserName.Text = "username";
-            this.txtUserName.UseWaitCursor = true;
+            this.txtUserName.Text = "admin";
             this.txtUserName.Enter += new System.EventHandler(this.Form1_Load);
             // 
             // metroPanel2
@@ -167,10 +166,11 @@ namespace PointOfSalesApp
             this.txtPassword.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtPassword.Location = new System.Drawing.Point(27, 3);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '●';
             this.txtPassword.Size = new System.Drawing.Size(185, 23);
             this.txtPassword.TabIndex = 2;
-            this.txtPassword.Text = "password";
-            this.txtPassword.Click += new System.EventHandler(this.txtPassword_Click);
+            this.txtPassword.Text = "admin";
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // appLogo
             // 
@@ -190,10 +190,9 @@ namespace PointOfSalesApp
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSignIn.Location = new System.Drawing.Point(117, 359);
             this.btnSignIn.Name = "btnSignIn";
-            this.btnSignIn.Size = new System.Drawing.Size(75, 23);
             this.btnSignIn.TabIndex = 8;
             this.btnSignIn.Text = "Sign-In";
-            this.btnSignIn.Enter += new System.EventHandler(this.btnSignIn_Enter);
+            this.btnSignIn.Click += new System.EventHandler(this.btnSignIn_Click);
             // 
             // lblDisc1
             // 

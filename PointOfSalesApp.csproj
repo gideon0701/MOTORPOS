@@ -69,6 +69,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -87,12 +89,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="itemsSold.cs">
+      <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Login\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\Model\ILoginModel.cs" />
+    <Compile Include="Login\Model\LoginModel.cs" />
+    <Compile Include="Login\Presenter\LoginPresenter.cs" />
+    <Compile Include="Login\View\ILoginView.cs" />
     <Compile Include="Main\AddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,8 +138,32 @@
     <Compile Include="Main\Wholesale.Designer.cs">
       <DependentUpon>Wholesale.cs</DependentUpon>
     </Compile>
+    <Compile Include="POSModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POSModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POSModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POSModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="product.cs">
+      <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="salesTransaction.cs">
+      <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user.cs">
+      <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Login\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -158,6 +191,13 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <EntityDeploy Include="POSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>POSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="POSModel.edmx.diagram">
+      <DependentUpon>POSModel.edmx</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -177,17 +217,28 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Login\Model\" />
-    <Folder Include="Login\Presenter\" />
-    <Folder Include="Login\View\" />
     <Folder Include="Main\Model\" />
     <Folder Include="Main\Presenter\" />
     <Folder Include="Main\View\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MetroFramework.txt" />
+    <Content Include="POSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>POSModel.edmx</DependentUpon>
+      <LastGenOutput>POSModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="POSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>POSModel.edmx</DependentUpon>
+      <LastGenOutput>POSModel.cs</LastGenOutput>
+    </Content>
     <Content Include="POS_DEV.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="POS_DEV_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>POS_DEV.mdf</DependentUpon>
     </Content>
     <None Include="Resources\userSam22.png" />
     <None Include="Resources\userSam21.png" />
@@ -263,6 +314,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

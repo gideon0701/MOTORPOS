@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="POS_DEVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="itemsSold">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="salesID" Type="int" />
+          <Property Name="productID" Type="int" />
+          <Property Name="quantitySold" Type="int" Nullable="false" />
+          <Property Name="unitPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="transactionDate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="productCategory" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="itemDescription" Type="varchar" MaxLength="100" />
+          <Property Name="PricePerUnit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="productCategory" Type="varchar" MaxLength="100" />
+          <Property Name="quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="isAvailable" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="salesTransaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="salesType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="transactionDate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="subtotal_amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="taxableAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="totalPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="discount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="amountPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="250" />
+          <Property Name="username" Type="varchar" MaxLength="50" />
+          <Property Name="userPassword" Type="varchar" MaxLength="50" />
+          <Property Name="designation" Type="varchar" MaxLength="50" />
+          <Property Name="contact" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="birthdate" Type="int" />
+          <Property Name="age" Type="int" />
+          <Property Name="emergencyContact" Type="varchar" MaxLength="100" />
+          <Property Name="emergencycontactNum" Type="varchar" MaxLength="50" />
+          <Property Name="userImage" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__itemsSold__produ__173876EA">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="itemsSold" Type="Self.itemsSold" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="itemsSold">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__itemsSold__sales__164452B1">
+          <End Role="salesTransaction" Type="Self.salesTransaction" Multiplicity="0..1" />
+          <End Role="itemsSold" Type="Self.itemsSold" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salesTransaction">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="itemsSold">
+              <PropertyRef Name="salesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="POS_DEVModelStoreContainer">
+          <EntitySet Name="itemsSold" EntityType="Self.itemsSold" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salesTransaction" EntityType="Self.salesTransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__itemsSold__produ__173876EA" Association="Self.FK__itemsSold__produ__173876EA">
+            <End Role="product" EntitySet="product" />
+            <End Role="itemsSold" EntitySet="itemsSold" />
+          </AssociationSet>
+          <AssociationSet Name="FK__itemsSold__sales__164452B1" Association="Self.FK__itemsSold__sales__164452B1">
+            <End Role="salesTransaction" EntitySet="salesTransaction" />
+            <End Role="itemsSold" EntitySet="itemsSold" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="POS_DEVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="itemsSold">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="salesID" Type="Int32" />
+          <Property Name="productID" Type="Int32" />
+          <Property Name="quantitySold" Type="Int32" Nullable="false" />
+          <Property Name="unitPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="transactionDate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="productCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="product" Relationship="Self.FK__itemsSold__produ__173876EA" FromRole="itemsSold" ToRole="product" />
+          <NavigationProperty Name="salesTransaction" Relationship="Self.FK__itemsSold__sales__164452B1" FromRole="itemsSold" ToRole="salesTransaction" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="itemDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PricePerUnit" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="productCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="isAvailable" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="itemsSolds" Relationship="Self.FK__itemsSold__produ__173876EA" FromRole="product" ToRole="itemsSold" />
+        </EntityType>
+        <EntityType Name="salesTransaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="salesType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="transactionDate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="subtotal_amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="taxableAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="totalPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="discount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="amountPaid" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="itemsSolds" Relationship="Self.FK__itemsSold__sales__164452B1" FromRole="salesTransaction" ToRole="itemsSold" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="birthdate" Type="Int32" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="emergencyContact" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="emergencycontactNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__itemsSold__produ__173876EA">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="itemsSold" Type="Self.itemsSold" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="itemsSold">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__itemsSold__sales__164452B1">
+          <End Role="salesTransaction" Type="Self.salesTransaction" Multiplicity="0..1" />
+          <End Role="itemsSold" Type="Self.itemsSold" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salesTransaction">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="itemsSold">
+              <PropertyRef Name="salesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="POS_DEVEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="itemsSolds" EntityType="Self.itemsSold" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="salesTransactions" EntityType="Self.salesTransaction" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK__itemsSold__produ__173876EA" Association="Self.FK__itemsSold__produ__173876EA">
+            <End Role="product" EntitySet="products" />
+            <End Role="itemsSold" EntitySet="itemsSolds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__itemsSold__sales__164452B1" Association="Self.FK__itemsSold__sales__164452B1">
+            <End Role="salesTransaction" EntitySet="salesTransactions" />
+            <End Role="itemsSold" EntitySet="itemsSolds" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="POS_DEVModelStoreContainer" CdmEntityContainer="POS_DEVEntities">
+          <EntitySetMapping Name="itemsSolds">
+            <EntityTypeMapping TypeName="POS_DEVModel.itemsSold">
+              <MappingFragment StoreEntitySet="itemsSold">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="salesID" ColumnName="salesID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="quantitySold" ColumnName="quantitySold" />
+                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+                <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
+                <ScalarProperty Name="productCategory" ColumnName="productCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="POS_DEVModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+                <ScalarProperty Name="PricePerUnit" ColumnName="PricePerUnit" />
+                <ScalarProperty Name="productCategory" ColumnName="productCategory" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salesTransactions">
+            <EntityTypeMapping TypeName="POS_DEVModel.salesTransaction">
+              <MappingFragment StoreEntitySet="salesTransaction">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="salesType" ColumnName="salesType" />
+                <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
+                <ScalarProperty Name="subtotal_amount" ColumnName="subtotal_amount" />
+                <ScalarProperty Name="taxableAmount" ColumnName="taxableAmount" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="amountPaid" ColumnName="amountPaid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="POS_DEVModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="designation" ColumnName="designation" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="emergencyContact" ColumnName="emergencyContact" />
+                <ScalarProperty Name="emergencycontactNum" ColumnName="emergencycontactNum" />
+                <ScalarProperty Name="userImage" ColumnName="userImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
